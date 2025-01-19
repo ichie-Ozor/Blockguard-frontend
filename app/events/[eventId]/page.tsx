@@ -1,3 +1,4 @@
+"use client";
 // import { useRouter } from 'next/router';
 // import Image1 from "@/assets/eventList/image1.png";
 // import Image from "next/image";
