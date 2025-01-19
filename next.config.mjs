@@ -7,6 +7,7 @@ const nextConfig = {
         hostname: "s3-alpha-sig.figma.com/**",
       },
     ],
+    unoptimized: true, // Disable the default image optimization
   },
   output: 'export',
 };

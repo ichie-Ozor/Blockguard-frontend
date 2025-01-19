@@ -74,9 +74,8 @@
 // };
 
 // export default EventSinglePage;
-"use client";
-import React from "react";
-import { useRouter } from "next/router";
+
+// Import necessary assets and components
 import Image1 from "@/assets/eventList/image1.png";
 import Image from "next/image";
 import Gift from "@/assets/eventList/gift.svg";
@@ -86,10 +85,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
 
-// Example function to fetch event data
+// Example function to fetch event data (server-side)
 const fetchEventData = async (eventId: string) => {
-  // Example of fetching event data by eventId (replace with your API call)
   console.log(eventId);
+  // Simulate fetching event data based on the eventId
   return {
     eventName: "Blockchain Tournament",
     startDate: "Sept. 12 - Oct 13th",
@@ -106,33 +105,29 @@ const fetchEventData = async (eventId: string) => {
   };
 };
 
-// Generate Static Params function for static export
+// Static Generation using getStaticProps and getStaticPaths
 export const generateStaticParams = async () => {
-  // Fetch the list of eventIds. This is just an example; you should replace this with real data.
-  const eventIds = ["event1", "event2", "event3"]; // Replace with actual event ID fetching logic
-  return eventIds.map((eventId) => ({
-    eventId: eventId,
-  }));
+  // Example list of event IDs, replace with real logic for fetching event IDs
+  const eventIds = ["event1", "event2", "event3"];
+  return eventIds.map((eventId) => ({ eventId }));
 };
 
-const EventSinglePage = () => {
-  const router = useRouter();
-  const { eventId } = router.query;
+// Fetching event data using getStaticProps
+export async function getStaticProps({
+  params,
+}: {
+  params: { eventId: string };
+}) {
+  const eventData = await fetchEventData(params.eventId);
 
-  const [eventData, setEventData] = React.useState<any>(null);
+  return {
+    props: {
+      eventData,
+    },
+  };
+}
 
-  React.useEffect(() => {
-    if (eventId) {
-      fetchEventData(eventId as string).then((data) => {
-        setEventData(data);
-      });
-    }
-  }, [eventId]);
-
-  if (!eventData) {
-    return <div>Loading...</div>;
-  }
-
+const EventSinglePage = ({ eventData }: { eventData: any }) => {
   return (
     <div className="pt-5">
       <div className="max-h-[50vh]">
