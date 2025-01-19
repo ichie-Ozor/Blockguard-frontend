@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import Image1 from "@/assets/eventList/image1.png";
 import Image from "next/image";
 import Gift from "@/assets/eventList/gift.svg";
@@ -9,9 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
 
 const EventSinglePage = () => {
-  const router = useRouter();
-  // const { eventId } = router.;
-  console.log(router);
   return (
     <div className="pt-5">
       <div className="max-h-[50vh]">
