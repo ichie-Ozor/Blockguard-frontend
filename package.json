@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "postinstall": "node scripts/platform-check.js",
-    "preinstall": "node ./scripts/check-platform.js"
+    "postinstall": "",
+    "preinstall": ""
   },
   "optionalDependencies": {
     "@next/swc-win32-x64-msvc": "15.1.5"
@@ -43,3 +43,4 @@
     "typescript": "^5"
   }
 }
+
