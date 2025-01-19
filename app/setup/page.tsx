@@ -31,7 +31,7 @@ const SetupPage = () => {
   };
   setup.description = description;
 
-  const onSetupSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSetupSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log(description, "clickeed", setup);
     const baseUrl = url + "/signup";

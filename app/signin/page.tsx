@@ -23,7 +23,7 @@ const SigninPage = () => {
     }));
   };
 
-  const onSigninSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSigninSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log(detail, "signin page");
     router.push("/overview");
