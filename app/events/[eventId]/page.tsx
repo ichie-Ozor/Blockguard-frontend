@@ -189,8 +189,6 @@
 //   );
 // };
 
-// export default EventSinglePage;
-
 import Image1 from "@/assets/eventList/image1.png";
 import Image from "next/image";
 import Gift from "@/assets/eventList/gift.svg";
@@ -200,9 +198,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
 
-// Example function to fetch event data (server-side)
+// Mock function to fetch event data
 const fetchEventData = async (eventId: string) => {
-  console.log(eventId);
   return {
     eventName: "Blockchain Tournament",
     startDate: "Sept. 12 - Oct 13th",
@@ -219,42 +216,55 @@ const fetchEventData = async (eventId: string) => {
   };
 };
 
-// Generate Static Params for the App Router (Next.js 13)
+// Generate static params for SSG
 export const generateStaticParams = async () => {
   const eventIds = ["event1", "event2", "event3"];
   return eventIds.map((eventId) => ({ eventId }));
 };
 
-const EventSinglePage = async ({ params }: { params: { eventId: string } }) => {
-  const eventData = await fetchEventData(params.eventId);
+// Type definition for PageProps
+interface PageProps {
+  params: {
+    eventId: string;
+  };
+}
 
+// Page component
+const EventSinglePage = async ({ params }: PageProps) => {
+  const { eventId } = params;
+  const eventData = await fetchEventData(eventId);
+
+  // Directly reference eventId in JSX to avoid ESLint warnings
   return (
     <div className="pt-5">
+      <h1 className="text-lg font-bold">Event: {eventId}</h1>{" "}
+      {/* Use eventId directly */}
+      {/* Event Image */}
       <div className="max-h-[50vh]">
         <Image
           src={Image1}
-          alt="img"
+          alt="Event image"
           className="rounded-2xl w-full max-h-[50vh] object-cover object-center"
         />
       </div>
-
+      {/* Event Details */}
       <p className="text-[#454545] mt-3">
         {eventData.eventName} is a real-world, user-friendly blockchain platform
         event that emphasizes trust, transparency, and automation.
       </p>
-
+      {/* Event Start Date */}
       <div className="flex items-center space-x-2 text-xs text-[#454545] mt-8">
-        <Image src={Date} alt="img" />
+        <Image src={Date} alt="Date icon" />
         <p>{eventData.startDate}</p>
       </div>
-
+      {/* Prize Pool */}
       <div className="flex items-center space-x-2 text-xs text-[#454545] mt-5">
-        <Image src={Gift} alt="img" />
+        <Image src={Gift} alt="Gift icon" />
         <p>
           Prize Pool: <span className="font-bold">{eventData.prizePool}</span>
         </p>
       </div>
-
+      {/* Prizes */}
       <ul className="text-xs text-[#454545] mt-5 space-y-1 ml-6 list-disc">
         {eventData.prizes.map((prize, index) => (
           <li key={index}>{prize}</li>
@@ -263,15 +273,15 @@ const EventSinglePage = async ({ params }: { params: { eventId: string } }) => {
       <p className="text-xs text-[#454545] mt-2">
         Note: To be paid out equally to individual members of each team.
       </p>
-
+      {/* Participants */}
       <div className="flex justify-between items-center mt-8">
         <div className="flex items-center space-x-2 text-xs text-[#454545]">
-          <Image src={People} alt="img" />
+          <Image src={People} alt="People icon" />
           <p className="font-bold">{eventData.participants} Participants</p>
         </div>
         <p className="text-xs underline text-[#00A479]">View Participants</p>
       </div>
-
+      {/* Action Buttons */}
       <div className="flex justify-center items-center">
         <div className="flex space-x-5 mt-10 w-full justify-center items-center max-w-2xl">
           <Link href="/signin" className="w-full">

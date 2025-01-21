@@ -9,7 +9,8 @@ const nextConfig = {
     ],
     unoptimized: true, // Disable the default image optimization
   },
-  output: 'export',
+  output: "export",
+  distDir: "build",
 };
 
 export default nextConfig;
